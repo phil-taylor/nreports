@@ -4,6 +4,12 @@
 , "repository": {
 	"url": "https://bitbucket.org/phil_a_taylor/nreports"
 }
+,"licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/phil-taylor/nreports/blob/master/LICENSE"
+    }
+  ]
 , "main": "index.js"
 , "dependencies":
   { "jade": "0.30.0"
