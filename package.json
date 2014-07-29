@@ -1,8 +1,8 @@
 { "name": "nreports"
 , "description": "Provides basic reporting framework for NodeJS."
-, "version": "0.0.15"
+, "version": "0.0.16"
 , "repository": {
-	"url": "https://bitbucket.org/phil_a_taylor/nreports"
+	"url": "https://github.com/phil-taylor/nreports"
 }
 ,"licenses": [
     {
