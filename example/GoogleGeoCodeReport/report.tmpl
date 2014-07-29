@@ -1,0 +1,27 @@
+<h1>Google GeoCode Report</h1>
+
+<h3>Parameters</h3>
+<ul>
+	{{#each parameters}}
+		<li>{{name}} = {{value}}</li>
+	{{/each}}
+</ul>
+
+<h3>Address Found</h3>
+<ul>
+	{{#each results.0.address_components}}		
+		<li>
+			({{types}}) - {{long_name}}
+		</li>
+	{{/each}}
+</ul>
+
+<h3>Geo Location</h3>
+<ul>	
+	<li>
+		(lat/long) - {{results.0.geometry.location.lat}}, {{results.0.geometry.location.lng}}
+	</li>
+	<li>
+		(location type) - {{results.0.geometry.location_type}}
+	</li>
+</ul>
