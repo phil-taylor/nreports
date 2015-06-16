@@ -96,3 +96,23 @@ exports.testExecuteLiveJson = function(test) {
 	});
 	
 }
+
+exports.testGetDatasourceUrlWithHostnameInConfig = function(test) {
+	test.expect(1);
+
+	var ds = new webjson("{googleHost}/:about/:me", null);
+
+	test.equal(ds.getDatasourceUrl(), "http://www.gooogle.com/:about/:me");
+	test.done();
+}
+
+exports.testGetDatasourceUrlWithHostnameInEnvironment = function(test) {
+	test.expect(1);
+
+	process.env.googleHostEnv = 'http://www.gooogle.com';
+
+	var ds = new webjson("{googleHostEnv}/:about/:me", null);
+
+	test.equal(ds.getDatasourceUrl(), "http://www.gooogle.com/:about/:me");
+	test.done();
+}

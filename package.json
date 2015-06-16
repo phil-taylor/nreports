@@ -1,6 +1,6 @@
 { "name": "nreports"
 , "description": "Provides basic reporting framework for NodeJS."
-, "version": "0.0.17"
+, "version": "0.0.18"
 , "repository": {
 	"url": "https://github.com/phil-taylor/nreports"
 }
@@ -16,6 +16,8 @@
   , "async" : "0.9.0"
   , "handlebars" : "2.0.0-alpha.4"
   , "phantom" : "0.6.5"
+  , "config": "1.0.2"
+  , "stringtokenizer" : "0.0.4"
   },
   "devDependencies":
   { "nodeunit": "0.9.0"
