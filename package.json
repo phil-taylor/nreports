@@ -1,6 +1,6 @@
 { "name": "nreports"
 , "description": "Provides basic reporting framework for NodeJS."
-, "version": "0.0.16"
+, "version": "0.0.17"
 , "repository": {
 	"url": "https://github.com/phil-taylor/nreports"
 }
@@ -12,14 +12,13 @@
   ]
 , "main": "index.js"
 , "dependencies":
-  { "jade": "0.30.0"
-  , "jade-ext": "latest"
-  , "async" : "latest"
-  , "handlebars" : "latest"
-  , "phantom" : "latest"
+  { "jade": "1.5.0"  
+  , "async" : "0.9.0"
+  , "handlebars" : "2.0.0-alpha.4"
+  , "phantom" : "0.6.5"
   },
   "devDependencies":
-  { "nodeunit": "*"
-  , "sinon": "*"    
+  { "nodeunit": "0.9.0"
+  , "sinon": "1.10.3"    
   }
 }
