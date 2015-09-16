@@ -1,5 +1,6 @@
 var livejson = require('../lib/datasources/livejson');
 var webjson = require('../lib/datasources/webjson');
+var series = require('../lib/datasources/series');
 var ReportParameter = require('../lib/parameter');
 
 exports.testGetParameterizedUrlWithPathVariables = function(test) {
@@ -115,4 +116,114 @@ exports.testGetDatasourceUrlWithHostnameInEnvironment = function(test) {
 
 	test.equal(ds.getDatasourceUrl(), "http://www.gooogle.com/:about/:me");
 	test.done();
+}
+
+exports.testExecuteSeriesNoKeys = function(test) {
+    test.expect(6);
+
+    var params = [];
+
+    var json1 = new livejson(params, [
+        {"id": 1, "name": "James Smith"},
+        {"id": 2, "name": "Will Farrel"}
+    ]);
+
+    var json2 = new livejson(params, [
+        {"person_id": 2, "phone": "503-555-1212"},
+        {"person_id": 1, "phone": "971-555-1313"}
+    ]);
+
+    var ds = new series(params, [json1, json2]);
+
+    ds.execute(function(err, data){
+
+        test.ifError(err);
+        test.ok(data != null);
+        test.ok(data instanceof Array);
+        test.equal(data.length, 4);
+
+        console.log(data[0]);
+        test.equal(data[0].name, 'James Smith');
+
+        console.log(data[3]);
+        test.equal(data[3].phone, '971-555-1313');
+
+        test.done();
+    });
+
+}
+
+exports.testExecuteSeriesWithKeys = function(test) {
+    test.expect(7);
+
+    var params = [];
+
+    var json1 = new livejson(params, [
+        {"id": 1, "name": "James Smith"},
+        {"id": 2, "name": "Will Farrel"}
+    ]);
+
+    var json2 = new livejson(params, [
+        {"person_id": 2, "phone": "503-555-1212"},
+        {"person_id": 1, "phone": "971-555-1313"}
+    ]);
+
+    var ds = new series(params, [json1, json2]);
+    ds.setKeys(["id","person_id"]);
+
+    ds.execute(function(err, data){
+
+        test.ifError(err);
+        test.ok(data != null);
+        test.ok(data instanceof Array);
+        test.equal(data.length, 2);
+
+        test.equal(data[0].id, 2);
+        test.equal(data[0].name, 'Will Farrel');
+        test.equal(data[0].phone, '503-555-1212');
+
+        console.log(data[0]);
+
+        test.done();
+    });
+
+}
+
+exports.testExecuteSeriesWithKeysAndTablePrefix = function(test) {
+    test.expect(7);
+
+    var params = [];
+
+    var json1 = new livejson(params, {
+        "status" : 200,
+        "results" : [
+        {"id": 1, "name": "James Smith"},
+        {"id": 2, "name": "Will Farrel"}
+        ]
+    });
+
+    var json2 = new livejson(params, [
+        {"person_id": 2, "phone": "503-555-1212"},
+        {"person_id": 1, "phone": "971-555-1313"}
+    ]);
+
+    var ds = new series(params, [json1, json2]);
+    ds.setKeys(["results:id","person_id"]);
+
+    ds.execute(function(err, data){
+
+        test.ifError(err);
+        test.ok(data != null);
+        test.ok(data instanceof Array);
+        test.equal(data.length, 2);
+
+        test.equal(data[0].id, 2);
+        test.equal(data[0].name, 'Will Farrel');
+        test.equal(data[0].phone, '503-555-1212');
+
+        console.log(data[0]);
+
+        test.done();
+    });
+
 }
