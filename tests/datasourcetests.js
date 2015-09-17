@@ -118,7 +118,7 @@ exports.testGetDatasourceUrlWithHostnameInEnvironment = function(test) {
 	test.done();
 }
 
-exports.testExecuteSeriesNoKeys = function(test) {
+exports.testExecuteSeriesNoSelectors = function(test) {
     test.expect(6);
 
     var params = [];
@@ -153,7 +153,7 @@ exports.testExecuteSeriesNoKeys = function(test) {
 
 }
 
-exports.testExecuteSeriesWithKeys = function(test) {
+exports.testExecuteSeriesWithSelectors = function(test) {
     test.expect(7);
 
     var params = [];
@@ -169,7 +169,10 @@ exports.testExecuteSeriesWithKeys = function(test) {
     ]);
 
     var ds = new series(params, [json1, json2]);
-    ds.setKeys(["id","person_id"]);
+    ds.setSelectors([
+        { key: "id" },
+        { key: "person_id" }
+    ]);
 
     ds.execute(function(err, data){
 
@@ -189,7 +192,7 @@ exports.testExecuteSeriesWithKeys = function(test) {
 
 }
 
-exports.testExecuteSeriesWithKeysAndTablePrefix = function(test) {
+exports.testExecuteSeriesWithSelectorsAndTable = function(test) {
     test.expect(7);
 
     var params = [];
@@ -208,7 +211,11 @@ exports.testExecuteSeriesWithKeysAndTablePrefix = function(test) {
     ]);
 
     var ds = new series(params, [json1, json2]);
-    ds.setKeys(["results:id","person_id"]);
+    var ds = new series(params, [json1, json2]);
+    ds.setSelectors([
+        { key: "id", table: "results" },
+        { key: "person_id" }
+    ]);
 
     ds.execute(function(err, data){
 
@@ -220,6 +227,50 @@ exports.testExecuteSeriesWithKeysAndTablePrefix = function(test) {
         test.equal(data[0].id, 2);
         test.equal(data[0].name, 'Will Farrel');
         test.equal(data[0].phone, '503-555-1212');
+
+        console.log(data[0]);
+
+        test.done();
+    });
+
+}
+
+exports.testExecuteSeriesWithSelectorsAndTableAndTransformer = function(test) {
+    test.expect(8);
+
+    var params = [];
+
+    var json1 = new livejson(params, {
+        "status" : 200,
+        "results" : [
+            {"id": 1, "name": "James Smith"},
+            {"id": 2, "name": "Will Farrel"}
+        ]
+    });
+
+    var json2 = new livejson(params, [
+        {"person_id": 2, "phone": "503-555-1212"},
+        {"person_id": 1, "phone": "971-555-1313"}
+    ]);
+
+    var ds = new series(params, [json1, json2]);
+    var ds = new series(params, [json1, json2]);
+    ds.setSelectors([
+        { key: "id", table: "results" },
+        { key: "person_id", transformer: function(item){ return { phone: item.phone }; } }
+    ]);
+
+    ds.execute(function(err, data){
+
+        test.ifError(err);
+        test.ok(data != null);
+        test.ok(data instanceof Array);
+        test.equal(data.length, 2);
+
+        test.equal(data[0].id, 2);
+        test.equal(data[0].name, 'Will Farrel');
+        test.equal(data[0].phone, '503-555-1212');
+        test.ok(data[0].person_id == null);
 
         console.log(data[0]);
 
