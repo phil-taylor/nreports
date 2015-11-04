@@ -181,11 +181,11 @@ exports.testExecuteSeriesWithSelectors = function(test) {
         test.ok(data instanceof Array);
         test.equal(data.length, 2);
 
-        test.equal(data[0].id, 2);
-        test.equal(data[0].name, 'Will Farrel');
-        test.equal(data[0].phone, '503-555-1212');
+        test.equal(data[1].id, 2);
+        test.equal(data[1].name, 'Will Farrel');
+        test.equal(data[1].phone, '503-555-1212');
 
-        console.log(data[0]);
+        console.log(data[1]);
 
         test.done();
     });
@@ -224,11 +224,11 @@ exports.testExecuteSeriesWithSelectorsAndTable = function(test) {
         test.ok(data instanceof Array);
         test.equal(data.length, 2);
 
-        test.equal(data[0].id, 2);
-        test.equal(data[0].name, 'Will Farrel');
-        test.equal(data[0].phone, '503-555-1212');
+        test.equal(data[1].id, 2);
+        test.equal(data[1].name, 'Will Farrel');
+        test.equal(data[1].phone, '503-555-1212');
 
-        console.log(data[0]);
+        console.log(data[1]);
 
         test.done();
     });
@@ -267,12 +267,12 @@ exports.testExecuteSeriesWithSelectorsAndTableAndTransformer = function(test) {
         test.ok(data instanceof Array);
         test.equal(data.length, 2);
 
-        test.equal(data[0].id, 2);
-        test.equal(data[0].name, 'Will Farrel');
-        test.equal(data[0].phone, '503-555-1212');
-        test.ok(data[0].person_id == null);
+        test.equal(data[1].id, 2);
+        test.equal(data[1].name, 'Will Farrel');
+        test.equal(data[1].phone, '503-555-1212');
+        test.ok(data[1].person_id == null);
 
-        console.log(data[0]);
+        console.log(data[1]);
 
         test.done();
     });
