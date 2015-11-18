@@ -1,7 +1,7 @@
 {
   "name": "nreports",
   "description": "Provides basic reporting framework for NodeJS.",
-  "version": "0.1.0",
+  "version": "0.26.0",
   "repository": {
     "url": "https://github.com/phil-taylor/nreports"
   },
