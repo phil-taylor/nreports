@@ -1,5 +1,5 @@
 # NReports
--------------
+[![NPM](https://nodei.co/npm/nreports.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nreports/)
 
 A simple nodejs reporting framework that leverages template runtimes for report generation. 
 
