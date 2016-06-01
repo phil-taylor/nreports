@@ -1,7 +1,7 @@
 {
   "name": "nreports",
   "description": "Provides basic reporting framework for NodeJS.",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "repository": {
     "url": "https://github.com/phil-taylor/nreports"
   },
@@ -18,6 +18,7 @@
     "handlebars": "2.0.0-alpha.4",
     "jade": "1.5.0",
     "lodash": "^4.6.1",
+    "lodash-joins": "^2.0.0",
     "phantom": ">=0.6.5",
     "stringtokenizer": "0.0.4"
   },
