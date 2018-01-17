@@ -21,6 +21,7 @@ var Report = require('./lib/report'),
 	SeriesDatasource = require('./lib/datasources/series'),
 	JadeRuntime = require('./lib/runtimes/jaderuntime'),
 	HandlebarsRuntime = require('./lib/runtimes/handlebarsruntime'),
+	MarkdownRuntime = require('./lib/runtimes/markdownruntime'),
 	PdfPipeline = require('./lib/pipelines/pdfpipeline');
 
 
@@ -29,6 +30,7 @@ exports.ReportParameter = ReportParameter;
 exports.ReportEngine = ReportEngine;
 exports.JadeRuntime = JadeRuntime;
 exports.HandlebarsRuntime = HandlebarsRuntime;
+exports.MarkdownRuntime = MarkdownRuntime;
 exports.LiveJsonDatasource = LiveJsonDatasource;
 exports.WebJsonDatasource = WebJsonDatasource;
 exports.SeriesDatasource = SeriesDatasource;
